@@ -54,7 +54,7 @@ getCheck(){
 }
 
 isLoggedIn(): boolean {
-  return this.getLogin() == 'false';
+  return this.getLogin() == 'true';
 }
 
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from '../service/auth.service';
 import { LoginModel } from './model/login-model';
 import { VertifyEmail } from './model/vertify-email';
@@ -16,7 +17,7 @@ export class LoginComponent implements OnInit {
   messsage: any
   username:any
   isCheck:any
-  constructor(private authService: AuthService, private fb: FormBuilder) {
+  constructor(private authService: AuthService, private fb: FormBuilder,private router: Router) {
     this.isCheck = this.authService.getCheck();
     this.username = localStorage.getItem('email')?.slice(1, -1);
     this.createForm();
@@ -46,6 +47,7 @@ export class LoginComponent implements OnInit {
         const isLogin:any = this.authService.getLogin();
         if(isLogin == 'true'){
           this.messsage = "Dang nhap thanh cong";
+          this.router.navigateByUrl('/admin/register');
         }else{
           this.messsage ="Dang nhap that bai";
         }
@@ -58,6 +60,7 @@ export class LoginComponent implements OnInit {
             const isLogin:any = this.authService.getLogin();
             if(isLogin == 'true'){
               this.messsage = "Dang nhap thanh cong";
+              this.router.navigateByUrl('/admin/register');
             }else{
               this.messsage ="Dang nhap that bai";
             }

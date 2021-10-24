@@ -29,7 +29,7 @@ export class CheckemailComponent implements OnInit {
   checkEmail(){
     localStorage.setItem('email', JSON.stringify(this.checkForm.get('email').value));
     this.authService.checkEmail(this.checkForm.value).subscribe(()=>{
-      this.router.navigateByUrl('/login')
+      this.router.navigateByUrl('auth/login')
       console.log(this.authService.getCheck());
 
     })
