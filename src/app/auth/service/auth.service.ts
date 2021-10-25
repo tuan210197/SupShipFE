@@ -7,6 +7,7 @@ import { map } from 'rxjs/operators';
 import { VertifyEmail } from '../login/model/vertify-email';
 import { VertifyResponse } from '../login/model/vertify-response';
 import { CheckResponse } from '../login/model/check-response';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({
@@ -27,7 +28,8 @@ vertifyEmail(vertifyEmail: VertifyEmail): Observable<any>{
 login(loginModel: LoginModel): Observable<any>{
   return this.http.post<LoginResponse>('http://localhost:8085/user/login', loginModel)
   .pipe(map(data =>{
-    localStorage.setItem("isLogin",data.success)
+    localStorage.setItem("isLogin",data.success);
+    environment.Token = data.data.token;
     this.loggedIn.emit(true);
     return true;
   }));

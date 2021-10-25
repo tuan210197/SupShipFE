@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from '../auth/auth-guard/auth.guard';
 import { AdminComponent } from './admin.component';
+import { InsertCustomerComponent } from './insert-customer/insert-customer.component';
 import { RegisterUserComponent } from './register-user/register-user.component';
 
 
@@ -11,7 +12,10 @@ const routes: Routes = [{
     {
       path: 'register', component: RegisterUserComponent, canActivate: [AuthGuard]
     },
-    { path: '**', redirectTo: 'register' },
+    {
+      path: 'insert-customer', component: InsertCustomerComponent, canActivate: [AuthGuard]
+    },
+    { path: '**', redirectTo: 'insert-customer' },
   ],
 }];
 

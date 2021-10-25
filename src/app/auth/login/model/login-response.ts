@@ -1,7 +1,7 @@
 
 export interface DataLogin{
   userUid: String;
-  token: String;
+  token: string;
 }
 
 export interface LoginResponse {

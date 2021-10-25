@@ -6,6 +6,9 @@ import { RegisterUserComponent } from './register-user/register-user.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
+import { InsertCustomerComponent } from './insert-customer/insert-customer.component';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 @NgModule({
   imports: [
     CommonModule,
@@ -13,8 +16,10 @@ import {MatSelectModule} from '@angular/material/select';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatSelectModule,
+    HttpClientModule,
+    FormsModule,
   ],
-  declarations: [AdminComponent,RegisterUserComponent],
+  declarations: [AdminComponent,RegisterUserComponent, InsertCustomerComponent],
 
 })
 export class AdminModule { }
