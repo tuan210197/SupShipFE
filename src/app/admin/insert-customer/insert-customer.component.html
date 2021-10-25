@@ -1410,11 +1410,185 @@
 </div>
 </div>
 <form [formGroup]="insertCustomerForm" (ngSubmit)="insertCustomer();">
-  <div   >
-    <div   *ngFor="let b of businesFormArray.controls; let i = index" > <span  ><input  type="checkbox" formArrayName="businessProducts" [formControlName]="i" ><label  > {{businessProductData[i].name}}</label></span></div>
+  <div  class="z-tabpanel">
+    <div  class="z-window z-window-noborder z-window-noheader z-window-embedded">
+        <div  class="z-window-content">
+            <div style="padding:4px;" class="panel-body z-div">
+                <div class="row z-div">
+                    <div  class="col-md-12 z-div"> <span class="z-label"></span></div>
+                </div>
+                <div  class="row z-div">
+                    <div  class="col-md-12 z-div">
+                        <div  class="row z-div">
+
+
+                          <!-- PHÂN LOẠI KHÁCH HÀNG -->
+                           <ng-container formGroupName="customerClassification">
+                            <div  class="col-md-6 z-div">
+                              <div  class="z-groupbox">
+                                  <div  class="z-groupbox-header">
+                                      <div class="z-caption" style="top: -17px;">
+                                          <div  class="z-caption-content"> <span style="font-weight: bold;font-size: 18px;" class="z-label">Phân loại khách hàng</span></div>
+                                      </div>
+                                  </div>
+                                  <div  class="z-groupbox-content" style="border-top:0;">
+                                      <div  class="row z-div">
+                                          <div  class="col-md-12 z-div"> <span  class="z-radiogroup"><span  class="z-radio"><input type="radio" checked="checked" formControlName="customerType"><label  class="z-radio-content">KH cá nhân</label></span>
+                                              <span
+                                                   class="z-radio"><input type="radio" formControlName="customerType" ><label  class="z-radio-content">KH doanh nghiệp</label></span></span>
+                                          </div>
+                                      </div>
+                                      <div  class="row z-div">
+                                          <div  class="col-md-12 z-div">
+                                              <div  style="padding: 2% 0 1.9%;" class="row z-div">
+                                                  <div  class="col-md-12 z-div"> <span  class="z-label">Sản phẩm kinh doanh</span> <span  style="color:red;" class="z-label">(*)</span></div>
+                                              </div>
+                                              <div  class="row z-div">
+                                                  <div  class="col-md-6 z-div"
+                                                   *ngFor="let b of businesFormArray.controls; let index = index">
+                                                   <span  class="z-checkbox">
+                                                     <input  type="checkbox" [formControl]="b" >
+                                                     <label  class="z-checkbox-content"> {{businessProductData[index].name}}</label></span></div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                           </ng-container>
+
+
+
+
+                           <!-- THÔNG TIN KHÁCH HÀNG -->
+                          <ng-container formGroupName="customerInformation" >
+                            <div  class="col-md-6 z-div">
+                              <div  class="z-groupbox">
+                                  <div  class="z-groupbox-header">
+                                      <div  class="z-caption" style="top: -17px;">
+                                          <div  class="z-caption-content"> <span  style="font-weight: bold;font-size: 18px;" class="z-label">Thông tin khách hàng</span></div>
+                                      </div>
+                                  </div>
+                                  <div  class="z-groupbox-content" style="border-top:0;">
+                                      <div  class="row z-div">
+                                          <div  class="col-md-6 z-div">
+                                              <div  class="z-vlayout" style="width: 357px;">
+                                                  <div  class="z-vlayout-inner" style="padding-bottom:0">
+                                                      <div  class="z-div"> <span  class="z-label">Tên cửa hàng/ công ty</span> <span style="color:red;" class="z-label">(*)</span></div>
+                                                  </div>
+                                                  <div  class="z-vlayout-inner" style="width: 357px;"><input formControlName="nameOfStore" class="z-textbox" value="" type="text" maxlength="100" placeholder="Nhập tên cửa hàng" style="width: 355px;"></div>
+                                              </div>
+                                          </div>
+                                          <div  class="col-md-6 z-div">
+                                              <div  class="z-vlayout" style="width: 358px;">
+                                                  <div  class="z-vlayout-inner" style="padding-bottom:0">
+                                                      <div  class="z-div"> <span  class="z-label">Chức danh</span> <span id="w1uPgc4" style="color:red;" class="z-label">(*)</span></div>
+                                                  </div>
+                                                  <div  class="z-vlayout-inner" style="width: 358px;"><input formControlName="title"  class="z-textbox" value="" type="text" maxlength="100" placeholder="Nhập chức danh" style="width: 356px;"></div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div  class="row z-div">
+                                          <div  class="col-md-6 z-div">
+                                              <div  class="z-vlayout" style="width: 357px;">
+                                                  <div  class="z-vlayout-inner" style="padding-bottom:0">
+                                                      <div  class="z-div"> <span  class="z-label">Người liên hệ</span> <span style="color:red;" class="z-label">(*)</span></div>
+                                                  </div>
+                                                  <div class="z-vlayout-inner" style="width: 357px;"><input formControlName="contact"  class="z-textbox" value="" type="text" maxlength="100" placeholder="Nhập người liên hệ" style="width: 355px;"></div>
+                                              </div>
+                                          </div>
+                                          <div  class="col-md-6 z-div">
+                                              <div  class="z-vlayout" style="width: 358px;">
+                                                  <div  class="z-vlayout-inner" style="padding-bottom:0">
+                                                      <div  class="z-div"> <span  class="z-label">Số điện thoại</span> <span  style="color:red;" class="z-label">(*)</span></div>
+                                                  </div>
+                                                  <div  class="z-vlayout-inner" style="width: 358px;"><input formControlName="phone" class="z-textbox" value="" type="text" maxlength="11" placeholder="Nhập số điện thoại" style="width: 356px;"></div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div  class="row z-div">
+                                          <div  class="col-md-6 z-div">
+                                              <div  class="z-vlayout" style="width: 357px;">
+                                                  <div class="z-vlayout-inner" style="padding-bottom:0">
+                                                      <div  class="z-div"> <span  class="z-label">Tỉnh/Thành phố</span> <span  style="color:red;" class="z-label">(*)</span></div>
+                                                  </div>
+
+                                                  <select class="combobox" [(ngModel)]="proviceSelect" (change)="getAllDistrict(proviceSelect)" formControlName="province">
+                                                    <option [ngValue]="null" [disabled]="true" >Chọn Tỉnh</option>
+                                                    <option *ngFor="let d of dataProvince" [ngValue]="d.provinceCode"> {{d.provinceName}}</option>
+
+                                                  </select>
+
+
+                                          </div>
+                                      </div>
+                                      <div  class="col-md-6 z-div">
+                                          <div  class="z-vlayout" style="width: 358px;">
+                                              <div  class="z-vlayout-inner" style="padding-bottom:0">
+                                                  <div  class="z-div"> <span  class="z-label">Quận/Huyện</span> <span  style="color:red;" class="z-label">(*)</span></div>
+                                              </div>
+                                              <select class="combobox" [(ngModel)]="districtSelect" (change)="getAllWard(districtSelect)" formControlName="district">
+                                                <option [ngValue]="null" [disabled]="true" >Chọn Quận/Huyện</option>
+                                                <option *ngFor="let d of dataDistrict" [ngValue]="d.districtCode"> {{d.districtName}}</option>
+
+                                              </select>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div  class="row z-div">
+                                      <div class="col-md-6 z-div">
+                                          <div  class="z-vlayout" style="width: 357px;">
+                                              <div  class="z-vlayout-inner" style="padding-bottom:0">
+                                                  <div  class="z-div"> <span  class="z-label">Phường/xã</span> <span  style="color:red;" class="z-label">(*)</span></div>
+                                              </div>
+                                              <select class="combobox" [(ngModel)]="wardSelect" formControlName="ward">
+                                                <option [ngValue]="null" [disabled]="true" >Chọn Phường/xã</option>
+                                                <option *ngFor="let d of dataWard" [ngValue]="d.wardCode"> {{d.wardName}}</option>
+
+                                              </select>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div  class="row z-div">
+                                      <div  class="col-md-12 z-div">
+                                          <div  class="z-vlayout" style="width: 745px;">
+                                              <div  class="z-vlayout-inner" style="padding-bottom:0">
+                                                  <div class="z-div"> <span  class="z-label">Địa chỉ</span> <span  style="color:red;" class="z-label">(*)</span></div>
+                                              </div>
+                                              <div class="z-vlayout-inner" style="width: 745px;"><input  formControlName="address" class="z-textbox"  type="text" maxlength="100" placeholder="Nhập địa chỉ" style="width: 743px;"></div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                          </ng-container>
+
+
+
+
+                    </div>
+
+                    <!-- BUTTON -->
+                    <div id="w1uPgg4" class="row z-div">
+                        <div id="w1uPhg4" class="col-md-12 z-div">
+                            <div id="w1uPig4" style="float:right;" class="z-hlayout">
+                                <div id="w1uPjg4-chdex" class="z-hlayout-inner" style="padding-right:5px"><button type="button"  id="w1uPjg4" class="z-button">Hủy</button></div>
+                                <div id="w1uPkg4-chdex" class="z-hlayout-inner" ><button type="submit"  class="btn btn-success z-button">Tạo mới</button></div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
   </div>
-  <button type="submit"> thêm</button>
+  </div>
 </form>
+
+
 
 
 <!-- <form [formGroup]="insertCustomerForm" (ngSubmit)="insertCustomer();">
@@ -1449,10 +1623,9 @@
                                                 </div>
                                                 <div  class="row z-div">
                                                     <div  class="col-md-6 z-div"
-                                                     *ngFor="let b of businesFormArray.controls; let index = index"
-                                                    formArrayName="businessProducts" [formControlName]="index" >
+                                                     *ngFor="let b of businesFormArray.controls; let index = index">
                                                      <span  class="z-checkbox">
-                                                       <input  type="checkbox"  >
+                                                       <input  type="checkbox" [formControl]="b" [formControlName]="i">
                                                        <label  class="z-checkbox-content"> {{businessProductData[index].name}}</label></span></div>
                                                 </div>
                                             </div>

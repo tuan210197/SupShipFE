@@ -41,19 +41,25 @@ export class InsertCustomerComponent implements OnInit {
     this.getAllCity();
     this.createForm();
     this.addCheckboxes();
+
+
    }
   private addCheckboxes() {
     this.businessProductData.forEach(() => this.businesFormArray.push(this.fb.control(false)));
   }
   ngOnInit(): void {
   }
+
+
+
+
+
   createForm(){
     this.insertCustomerForm = this.fb.group({
       customerClassification: this.fb.group({
         customerType: ['', [Validators.required]],
         businessProducts: this.fb.array([
         ]),
-
       }),
       customerInformation: this.fb.group({
         nameOfStore: ['', [Validators.required, Validators.pattern("^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$")]],
@@ -67,6 +73,12 @@ export class InsertCustomerComponent implements OnInit {
       })
     })
   }
+
+
+
+
+
+
 
 
 
@@ -92,10 +104,9 @@ export class InsertCustomerComponent implements OnInit {
   }
 
   insertCustomer(){
-  //   const selectBusinessValue = this.insertCustomerForm.value.businessProducts
-  //   .map((checked:any, i:any) => checked ? this.businessProductData[i].value : null)
-  //   .filter((v:any) => v !== null);
-  // console.log(selectBusinessValue);
+
+
+  console.log(this.insertCustomerForm.value);
 
 
   }
