@@ -22,11 +22,7 @@
                           </div>
                         </div>
                       <form (ngSubmit)="login()"  [formGroup]="loginForm">
-                        <!-- <div id="vHFPa-chdex" class="z-vlayout-inner" style="padding-bottom:5px">
-                          <div id="vHFPa" style="margin-bottom: 15px !important;" class="row z-div">
-                            <div  class="col-md-12 z-div"> <input formControlName="email" formCon style="width:100%;" class="z-login-control z-textbox"  type="text" maxlength="100" placeholder="Nhập tài khoản email..."></div>
-                          </div>
-                        </div> -->
+
                         <div class="input-email">
                             {{username}}
                         </div>
@@ -42,9 +38,12 @@
                             </div>
                           </div>
                         </div>
+                        <div id="vHFPg-chdex" class="z-vlayout-inner" style="padding-bottom:10px">
+                          <span > <a style="text-decoration: none; color:#00857f;" routerLink="/auth/forgot-password">Quên mật khẩu?</a></span>
+                        </div>
                         <div id="vHFPg-chdex" class="z-vlayout-inner" style="padding-bottom:5px">
                           <div id="vHFPg" style="margin-bottom:15px!important;" class="row z-div">
-                            <div  id="vHFPh" class="col-md-12 z-div"> <button type="submit" id="vHFPi" style="background-color:#00857f;" class="btn btn-block z-login-control z-button z-button-primary">Nhận mã OTP</button></div>
+                            <div  id="vHFPh" class="col-md-12 z-div"> <button type="submit" id="vHFPi" style="background-color:#00857f;" class="btn btn-block z-login-control z-button z-button-primary">Đăng nhập</button></div>
                           </div>
                         </div>
                       </form>

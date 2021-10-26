@@ -8,6 +8,7 @@ import { VertifyEmail } from '../login/model/vertify-email';
 import { VertifyResponse } from '../login/model/vertify-response';
 import { CheckResponse } from '../login/model/check-response';
 import { environment } from 'src/environments/environment';
+import { ChangePassword } from '../login/model/change-password';
 
 
 @Injectable({
@@ -29,7 +30,7 @@ login(loginModel: LoginModel): Observable<any>{
   return this.http.post<LoginResponse>('http://localhost:8085/user/login', loginModel)
   .pipe(map(data =>{
     localStorage.setItem("isLogin",data.success);
-    environment.Token = data.data.token;
+    localStorage.setItem("token",data.data.token);
     this.loggedIn.emit(true);
     return true;
   }));
@@ -41,6 +42,13 @@ checkEmail(email: string): Observable<any>{
     localStorage.setItem("isCheck",data.success);
     return true;
   }));
+}
+
+forgotPassword(email:string):Observable<any>{
+  return this.http.post<any>('http://localhost:8085/user/password/forgot', email)
+}
+changePassword(changeModel: ChangePassword):Observable<any>{
+  return this.http.post<any>('http://localhost:8085/user/password/change', changeModel)
 }
 
 

@@ -127,6 +127,7 @@ export class InsertCustomerComponent implements OnInit {
   insertCustomer(){
   this.bodyApi= this.insertCustomerForm.value;
   this.bodyApi.industry=this.selectedIndustryValues;
+  this.bodyApi.address=this.addressArray.value[0]
   console.log(this.bodyApi);
   this.insertCustomerForm.reset();
   this.adminService.insertCustomer(this.bodyApi).subscribe(data=>{

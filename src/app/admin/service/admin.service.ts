@@ -22,6 +22,6 @@ export class AdminService {
   }
 
   insertCustomer(body:any): Observable<any>{
-    return this.http.post<any>('http://localhost:8085/user/check-email', body);
+    return this.http.post<any>('http://localhost:8085/api/lead/createWeb', body);
   }
 }
