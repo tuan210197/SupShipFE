@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { AdminService } from '../service/admin.service';
 
 @Component({
@@ -15,8 +16,11 @@ export class InsertCustomerComponent implements OnInit {
   dataDistrict: "" | any
   dataWard: "" | any
   insertCustomerForm: FormGroup | any;
+  selectedIndustryValues:String[] = [];
+  industryError: Boolean = true;
+  bodyApi: any;
 
-  businessProductData = [
+  industryData = [
     { value: 'THU', name: 'Thư, hóa đơn, chứng từ' },
     { value: 'DC', name: 'Đồ Chơi' },
     { value: 'SACH', name: 'Sách, văn phòng phẩm' },
@@ -33,19 +37,21 @@ export class InsertCustomerComponent implements OnInit {
     { value: 'K', name: 'Khác' },
   ];
 
-  get businesFormArray() {
-    return this.insertCustomerForm.get('customerClassification.businessProducts') as FormArray;
+  get industryFormArray() {
+    return this.insertCustomerForm.get('industry') as FormArray;
   }
-
-  constructor(private fb: FormBuilder, private adminService: AdminService) {
+  get addressArray() {
+    return this.insertCustomerForm.get('address') as FormArray;
+  }
+  constructor(private fb: FormBuilder, private adminService: AdminService, private toastr: ToastrService) {
     this.getAllCity();
     this.createForm();
-    this.addCheckboxes();
-
-
+    this.addIndustrysControls();
    }
-  private addCheckboxes() {
-    this.businessProductData.forEach(() => this.businesFormArray.push(this.fb.control(false)));
+
+
+  private addIndustrysControls() {
+    this.industryData.forEach(() => this.industryFormArray.push(this.fb.control(false)));
   }
   ngOnInit(): void {
   }
@@ -56,32 +62,47 @@ export class InsertCustomerComponent implements OnInit {
 
   createForm(){
     this.insertCustomerForm = this.fb.group({
-      customerClassification: this.fb.group({
-        customerType: ['', [Validators.required]],
-        businessProducts: this.fb.array([
-        ]),
-      }),
-      customerInformation: this.fb.group({
-        nameOfStore: ['', [Validators.required, Validators.pattern("^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$")]],
         title:['', [Validators.required, Validators.pattern("^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$")]],
-        contact:['', [Validators.required, Validators.pattern("^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$")]],
-        phone:['', [Validators.required, Validators.pattern("[0-9]+")]],
-        province:['', [Validators.required]],
-        district:['', [Validators.required]],
-        ward:['', [Validators.required]],
-        address:['', [Validators.required, Validators.minLength(5)]],
-      })
+        companyName: ['', [Validators.required, Validators.pattern("^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$")]],//
+        fullName: ['', [Validators.required, Validators.pattern("^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$")]],//
+        representation: ['', [Validators.required, Validators.pattern("^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$")]], // người giới thiệu
+        phone:['', [Validators.required, Validators.pattern("[0-9]+")]],//
+        quantityMonth:['', [Validators.required]],//
+        inProvincePrice: ['', [Validators.required]],
+        outProvincePrice: ['', [Validators.required]],
+        weight: ['', [Validators.required]],
+        expectedRevenue: ['', [Validators.required]],
+        quality:['', [Validators.required]],
+        compensation:['', [Validators.required]],
+        payment:['', [Validators.required]],
+        other:['', [Validators.required]],
+        leadSource:['', [Validators.required]], //
+        address: this.fb.array([this.addAddressGroup()]),//
+        industry: this.fb.array([]), //
     })
+
+  }
+
+  addAddressGroup() {
+    return this.fb.group({
+      ward:['', [Validators.required]],
+      district:['', [Validators.required]],
+      province:['', [Validators.required]],
+      homeNo:['', [Validators.required, Validators.minLength(5)]],
+    });
   }
 
 
+  getSelectedIndustryValue() {
+    this.selectedIndustryValues = [];
+    this.industryFormArray.controls.forEach((control, i) => {
+      if (control.value) {
+        this.selectedIndustryValues.push(this.industryData[i].value);
+      }
 
-
-
-
-
-
-
+    });
+    this.industryError =  this.selectedIndustryValues.length > 0 ? false : true;
+  }
 
   getAllCity(){
     this.adminService.getProvince().subscribe(data=>{
@@ -104,10 +125,13 @@ export class InsertCustomerComponent implements OnInit {
   }
 
   insertCustomer(){
-
-
-  console.log(this.insertCustomerForm.value);
-
-
+  this.bodyApi= this.insertCustomerForm.value;
+  this.bodyApi.industry=this.selectedIndustryValues;
+  console.log(this.bodyApi);
+  this.insertCustomerForm.reset();
+  this.adminService.insertCustomer(this.bodyApi).subscribe(data=>{
+    console.log(data);
+    this.toastr.success("Tạo mới thành công");
+  })
   }
 }
