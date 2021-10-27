@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../service/auth.service';
 import { LoginModel } from './model/login-model';
@@ -28,10 +28,16 @@ export class LoginComponent implements OnInit {
   createForm() {
     this.loginForm = this.fb.group({
       email: [this.username, Validators.required],
-      password:[null, Validators.required],
+      password:[null, [Validators.required, Validators.minLength(5),Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{6,255}$')]],
       tokenCode:[null, Validators.required],
     });
   }
+
+  get password() {
+    return this.loginForm.get('password') as FormArray;
+  }
+
+
   login(){
     this.loginModel={
       email: this.loginForm.get('email').value,
@@ -47,7 +53,7 @@ export class LoginComponent implements OnInit {
         const isLogin:any = this.authService.getLogin();
         if(isLogin == 'true'){
           this.messsage = "Dang nhap thanh cong";
-          this.router.navigateByUrl('/admin/register');
+          this.router.navigateByUrl('/admin/insert-customer');
         }else{
           this.messsage ="Dang nhap that bai";
         }
@@ -60,7 +66,7 @@ export class LoginComponent implements OnInit {
             const isLogin:any = this.authService.getLogin();
             if(isLogin == 'true'){
               this.messsage = "Dang nhap thanh cong";
-              this.router.navigateByUrl('/admin/register');
+              this.router.navigateByUrl('/admin/insert-customer');
             }else{
               this.messsage ="Dang nhap that bai";
             }

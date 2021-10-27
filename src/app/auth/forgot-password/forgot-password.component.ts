@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../service/auth.service';
 
@@ -21,9 +21,12 @@ export class ForgotPasswordComponent implements OnInit {
 
   createForm() {
     this.forgotForm = this.fb.group({
-      email: [null, Validators.required],
+      email: [null, [Validators.required, Validators.email]],
 
     });
+  }
+  get email(): FormArray {
+    return this.forgotForm.get('email') as FormArray;
   }
   onSubmit(){
     localStorage.setItem('email', JSON.stringify(this.forgotForm.get('email').value));

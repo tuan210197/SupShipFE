@@ -1436,8 +1436,12 @@
                                           <div  class="col-md-12 z-div"> <span  class="z-radiogroup"><span  class="z-radio"><input type="radio" checked="checked" formControlName="leadSource" name="leadSource" value="PRIVATE"><label  class="z-radio-content">KH cá nhân</label></span>
                                               <span
                                                    class="z-radio"><input type="radio" formControlName="leadSource" name="leadSource" value="PUBLIC" ><label  class="z-radio-content">KH doanh nghiệp</label></span></span>
-                                          </div>
+
                                       </div>
+                                      <!-- <small class="text-danger"
+                                      *ngIf="checkleadSourceTouched()">
+                                          Phải chọn ít nhật 1 loại khách hàng</small> -->
+                                     </div>
                                       <div  class="row z-div">
                                           <div  class="col-md-12 z-div">
                                               <div  style="padding: 2% 0 1.9%;" class="row z-div">
@@ -1450,6 +1454,9 @@
                                                   <span  class="z-checkbox">
                                                     <input  type="checkbox" [formControl]="b" (change)="getSelectedIndustryValue()" >
                                                     <label  class="z-checkbox-content"> {{industryData[index].name}}</label></span></div>
+                                                    <small class="text-danger"
+                                                    *ngIf="industryError && checkIndustryControlsTouched()">
+                                                        Chọn ít nhất 1 sản phẩm kinh doanh</small>
                                                 </ng-container>
                                               </div>
                                           </div>
@@ -1479,6 +1486,10 @@
                                                       <div  class="z-div"> <span  class="z-label">Tên cửa hàng/ công ty</span> <span style="color:red;" class="z-label">(*)</span></div>
                                                   </div>
                                                   <div  class="z-vlayout-inner" style="width: 357px;"><input formControlName="companyName" class="z-textbox" value="" type="text" maxlength="100" placeholder="Nhập tên cửa hàng" style="width: 355px;"></div>
+                                                  <div *ngFor="let validation of insertCustomerMessage.companyName">
+                                                    <small class="text-danger"   *ngIf="insertCustomerForm.get('companyName')?.hasError(validation.type) && insertCustomerForm.get('companyName').touched">
+                                                     {{validation.message}}</small>
+                                                  </div>
                                               </div>
                                           </div>
                                           <div  class="col-md-6 z-div">
@@ -1487,7 +1498,11 @@
                                                       <div  class="z-div"> <span  class="z-label">Chức danh</span> <span id="w1uPgc4" style="color:red;" class="z-label">(*)</span></div>
                                                   </div>
                                                   <div  class="z-vlayout-inner" style="width: 358px;"><input formControlName="title"  class="z-textbox" value="" type="text" maxlength="100" placeholder="Nhập chức danh" style="width: 356px;"></div>
-                                              </div>
+                                                  <div *ngFor="let validation of insertCustomerMessage.title">
+                                                    <small class="text-danger"   *ngIf="insertCustomerForm.get('title')?.hasError(validation.type) && insertCustomerForm.get('title').touched">
+                                                     {{validation.message}}</small>
+                                                  </div>
+                                                </div>
                                           </div>
                                       </div>
                                       <div  class="row z-div">
@@ -1497,15 +1512,23 @@
                                                       <div  class="z-div"> <span  class="z-label">Họ và tên</span> <span style="color:red;" class="z-label">(*)</span></div>
                                                   </div>
                                                   <div class="z-vlayout-inner" style="width: 357px;"><input formControlName="fullName"  class="z-textbox" value="" type="text" maxlength="100" placeholder="Nhập người liên hệ" style="width: 355px;"></div>
-                                              </div>
+                                                  <div *ngFor="let validation of insertCustomerMessage.fullName">
+                                                    <small class="text-danger"   *ngIf="insertCustomerForm.get('fullName')?.hasError(validation.type) && insertCustomerForm.get('fullName').touched">
+                                                     {{validation.message}}</small>
+                                                  </div>
+                                                </div>
                                           </div>
                                           <div  class="col-md-6 z-div">
                                               <div  class="z-vlayout" style="width: 358px;">
                                                   <div  class="z-vlayout-inner" style="padding-bottom:0">
                                                       <div  class="z-div"> <span  class="z-label">Số điện thoại</span> <span  style="color:red;" class="z-label">(*)</span></div>
                                                   </div>
-                                                  <div  class="z-vlayout-inner" style="width: 358px;"><input formControlName="phone" class="z-textbox" value="" type="number" maxlength="11" placeholder="Nhập số điện thoại" style="width: 356px;"></div>
-                                              </div>
+                                                  <div  class="z-vlayout-inner" style="width: 358px;"><input formControlName="phone" class="z-textbox" value="" type="text" maxlength="11" placeholder="Nhập số điện thoại" style="width: 356px;"></div>
+                                                  <div *ngFor="let validation of insertCustomerMessage.phone">
+                                                    <small class="text-danger"   *ngIf="insertCustomerForm.get('phone')?.hasError(validation.type) && insertCustomerForm.get('phone').touched">
+                                                     {{validation.message}}</small>
+                                                  </div>
+                                                </div>
                                           </div>
                                       </div>
 
@@ -1561,7 +1584,11 @@
                                                   <div class="z-div"> <span  class="z-label">Địa chỉ</span> <span  style="color:red;" class="z-label">(*)</span></div>
                                               </div>
                                               <div class="z-vlayout-inner" style="width: 745px;"><input  formControlName="homeNo" class="z-textbox"  type="text" maxlength="100" placeholder="Nhập địa chỉ" style="width: 743px;"></div>
-                                          </div>
+                                              <div *ngFor="let validation of insertCustomerMessage.homeNo">
+                                                <small class="text-danger"   *ngIf="addressArray.controls[i]?.get('homeNo')?.hasError(validation.type) && addressArray.controls[i]?.get('homeNo')?.touched">
+                                                 {{validation.message}}</small>
+                                              </div>
+                                            </div>
                                       </div>
                                   </div>
                                       </ng-container>
@@ -1598,165 +1625,6 @@
 
 
 
-<!-- <form [formGroup]="insertCustomerForm" (ngSubmit)="insertCustomer();">
-  <div  class="z-tabpanel">
-    <div  class="z-window z-window-noborder z-window-noheader z-window-embedded">
-        <div  class="z-window-content">
-            <div style="padding:4px;" class="panel-body z-div">
-                <div class="row z-div">
-                    <div  class="col-md-12 z-div"> <span class="z-label"></span></div>
-                </div>
-                <div  class="row z-div">
-                    <div  class="col-md-12 z-div">
-                        <div  class="row z-div">
-                            <div  class="col-md-6 z-div">
-                                <div  class="z-groupbox">
-                                    <div  class="z-groupbox-header">
-                                        <div class="z-caption" style="top: -17px;">
-                                            <div  class="z-caption-content"> <span style="font-weight: bold;font-size: 18px;" class="z-label">Phân loại khách hàng</span></div>
-                                        </div>
-                                    </div>
-                                    <div  class="z-groupbox-content" style="border-top:0;">
-                                        <div  class="row z-div">
-                                            <div  class="col-md-12 z-div"> <span  class="z-radiogroup"><span  class="z-radio"><input type="radio"  name="_pgfjdice1" checked="checked"><label  class="z-radio-content">KH cá nhân</label></span>
-                                                <span
-                                                     class="z-radio"><input type="radio"  name="_pgfjdice1"><label  class="z-radio-content">KH doanh nghiệp</label></span></span>
-                                            </div>
-                                        </div>
-                                        <div  class="row z-div">
-                                            <div  class="col-md-12 z-div">
-                                                <div  style="padding: 2% 0 1.9%;" class="row z-div">
-                                                    <div  class="col-md-12 z-div"> <span  class="z-label">Sản phẩm kinh doanh</span> <span  style="color:red;" class="z-label">(*)</span></div>
-                                                </div>
-                                                <div  class="row z-div">
-                                                    <div  class="col-md-6 z-div"
-                                                     *ngFor="let b of businesFormArray.controls; let index = index">
-                                                     <span  class="z-checkbox">
-                                                       <input  type="checkbox" [formControl]="b" [formControlName]="i">
-                                                       <label  class="z-checkbox-content"> {{businessProductData[index].name}}</label></span></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div  class="col-md-6 z-div">
-                                <div  class="z-groupbox">
-                                    <div  class="z-groupbox-header">
-                                        <div  class="z-caption" style="top: -17px;">
-                                            <div  class="z-caption-content"> <span  style="font-weight: bold;font-size: 18px;" class="z-label">Thông tin khách hàng</span></div>
-                                        </div>
-                                    </div>
-                                    <div  class="z-groupbox-content" style="border-top:0;">
-                                        <div  class="row z-div">
-                                            <div  class="col-md-6 z-div">
-                                                <div  class="z-vlayout" style="width: 357px;">
-                                                    <div  class="z-vlayout-inner" style="padding-bottom:0">
-                                                        <div  class="z-div"> <span  class="z-label">Tên cửa hàng/ công ty</span> <span style="color:red;" class="z-label">(*)</span></div>
-                                                    </div>
-                                                    <div  class="z-vlayout-inner" style="width: 357px;"><input class="z-textbox" value="" type="text" maxlength="100" placeholder="Nhập tên cửa hàng" style="width: 355px;"></div>
-                                                </div>
-                                            </div>
-                                            <div  class="col-md-6 z-div">
-                                                <div  class="z-vlayout" style="width: 358px;">
-                                                    <div  class="z-vlayout-inner" style="padding-bottom:0">
-                                                        <div  class="z-div"> <span  class="z-label">Chức danh</span> <span id="w1uPgc4" style="color:red;" class="z-label">(*)</span></div>
-                                                    </div>
-                                                    <div  class="z-vlayout-inner" style="width: 358px;"><input class="z-textbox" value="" type="text" maxlength="100" placeholder="Nhập chức danh" style="width: 356px;"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div  class="row z-div">
-                                            <div  class="col-md-6 z-div">
-                                                <div  class="z-vlayout" style="width: 357px;">
-                                                    <div  class="z-vlayout-inner" style="padding-bottom:0">
-                                                        <div  class="z-div"> <span  class="z-label">Người liên hệ</span> <span style="color:red;" class="z-label">(*)</span></div>
-                                                    </div>
-                                                    <div class="z-vlayout-inner" style="width: 357px;"><input  class="z-textbox" value="" type="text" maxlength="100" placeholder="Nhập người liên hệ" style="width: 355px;"></div>
-                                                </div>
-                                            </div>
-                                            <div  class="col-md-6 z-div">
-                                                <div  class="z-vlayout" style="width: 358px;">
-                                                    <div  class="z-vlayout-inner" style="padding-bottom:0">
-                                                        <div  class="z-div"> <span  class="z-label">Số điện thoại</span> <span  style="color:red;" class="z-label">(*)</span></div>
-                                                    </div>
-                                                    <div  class="z-vlayout-inner" style="width: 358px;"><input  class="z-textbox" value="" type="text" maxlength="11" placeholder="Nhập số điện thoại" style="width: 356px;"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div  class="row z-div">
-                                            <div  class="col-md-6 z-div">
-                                                <div  class="z-vlayout" style="width: 357px;">
-                                                    <div class="z-vlayout-inner" style="padding-bottom:0">
-                                                        <div  class="z-div"> <span  class="z-label">Tỉnh/Thành phố</span> <span  style="color:red;" class="z-label">(*)</span></div>
-                                                    </div>
-
-                                                    <select class="combobox" [(ngModel)]="proviceSelect" (change)="getAllDistrict(proviceSelect)">
-                                                      <option [ngValue]="null" [disabled]="true" >Chọn Tỉnh</option>
-                                                      <option *ngFor="let d of dataProvince" [ngValue]="d.provinceCode"> {{d.provinceName}}</option>
-
-                                                    </select>
-
-
-                                            </div>
-                                        </div>
-                                        <div  class="col-md-6 z-div">
-                                            <div  class="z-vlayout" style="width: 358px;">
-                                                <div  class="z-vlayout-inner" style="padding-bottom:0">
-                                                    <div  class="z-div"> <span  class="z-label">Quận/Huyện</span> <span  style="color:red;" class="z-label">(*)</span></div>
-                                                </div>
-                                                <select class="combobox" [(ngModel)]="districtSelect" (change)="getAllWard(districtSelect)">
-                                                  <option [ngValue]="null" [disabled]="true" >Chọn Quận/Huyện</option>
-                                                  <option *ngFor="let d of dataDistrict" [ngValue]="d.districtCode"> {{d.districtName}}</option>
-
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div  class="row z-div">
-                                        <div class="col-md-6 z-div">
-                                            <div  class="z-vlayout" style="width: 357px;">
-                                                <div  class="z-vlayout-inner" style="padding-bottom:0">
-                                                    <div  class="z-div"> <span  class="z-label">Phường/xã</span> <span  style="color:red;" class="z-label">(*)</span></div>
-                                                </div>
-                                                <select class="combobox" [(ngModel)]="wardSelect" >
-                                                  <option [ngValue]="null" [disabled]="true" >Chọn Phường/xã</option>
-                                                  <option *ngFor="let d of dataWard" [ngValue]="d.wardCode"> {{d.wardName}}</option>
-
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div  class="row z-div">
-                                        <div  class="col-md-12 z-div">
-                                            <div  class="z-vlayout" style="width: 745px;">
-                                                <div  class="z-vlayout-inner" style="padding-bottom:0">
-                                                    <div class="z-div"> <span  class="z-label">Địa chỉ</span> <span  style="color:red;" class="z-label">(*)</span></div>
-                                                </div>
-                                                <div class="z-vlayout-inner" style="width: 745px;"><input  class="z-textbox" value="" type="text" maxlength="100" placeholder="Nhập địa chỉ" style="width: 743px;"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="w1uPgg4" class="row z-div">
-                        <div id="w1uPhg4" class="col-md-12 z-div">
-                            <div id="w1uPig4" style="float:right;" class="z-hlayout">
-                                <div id="w1uPjg4-chdex" class="z-hlayout-inner" style="padding-right:5px"><button type="button"  id="w1uPjg4" class="z-button">Hủy</button></div>
-                                <div id="w1uPkg4-chdex" class="z-hlayout-inner" style=""><button type="button"  class="btn btn-success z-button">Tạo mới</button></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-  </div>
-  </div>
-</form> -->
 
 
   <!-- kết thúc form -->
@@ -1775,5 +1643,4 @@
 </div>
 </div>
 </div>
-<div id="w1uPwb3" class="z-label-copyright z-div"> <span id="w1uPxb3" class="z-icon-copyright z-span"></span> <span id="w1uPyb3" class="z-label-copyright-text z-label">2017. CNTT Viettel Post. CSKH: 1900 8095. Hỗ trợ kỹ thuật: 0246 2661 507</span></div><span id="_z_vpagt1" style="display: none;"></span>
-</div>
+

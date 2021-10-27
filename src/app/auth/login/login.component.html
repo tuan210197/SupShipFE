@@ -10,7 +10,7 @@
                 <tbody>
                   <tr valign="middle">
                     <td id="vHFP3-chdex" style="">
-                      <div id="vHFP3" style="width:100%;" class="z-login-box z-vlayout">
+                      <div id="vHFP3" style="width:445px;" class="z-login-box z-vlayout">
                         <div id="vHFP4-chdex" class="z-vlayout-inner" style="padding-bottom:5px">
                           <div id="vHFP4" style="margin-bottom: 0!important;" class="row z-div">
                             <div id="vHFP5" style="text-align:center!important; padding-top:10px;" class="logo col-md-12 z-div"> <img id="vHFP6" style="width:100%;height:100%;" class="z-image" src="https://firebasestorage.googleapis.com/v0/b/fir-upload-e5fd0.appspot.com/o/image%2FLOGOSUPSHIP.jpg?alt=media&token=57a8dc49-d3a2-44c0-bf83-95c8efd6f730"></div>
@@ -31,6 +31,14 @@
                             <div  class="col-md-12 z-div"> <input  formControlName="password" style="width:100%;" class="z-login-control z-textbox"  type="password" maxlength="100" placeholder="Mật khẩu"></div>
                           </div>
                         </div>
+                          <small class="text-danger"
+                          *ngIf="password?.errors?.minlength  && password?.touched">
+                          Mật khẩu phải trên 5 kí tự</small><br>
+                          <small class="text-danger"   *ngIf="password?.errors?.pattern  && password?.touched">
+                            Mật khẩu của bạn phải chứa ít nhất, một chữ hoa, một chữ thường và một số</small>
+                          <small class="text-danger"
+                        *ngIf="password?.errors?.required && password?.touched">
+                        Bạn chưa nhập mật khẩu</small>
                         <div *ngIf="isCheck =='false'">
                           <div id="vHFPa-chdex" class="z-vlayout-inner" style="padding-bottom:5px">
                             <div id="vHFPa" style="margin-bottom: 15px !important;" class="row z-div">
@@ -43,7 +51,7 @@
                         </div>
                         <div id="vHFPg-chdex" class="z-vlayout-inner" style="padding-bottom:5px">
                           <div id="vHFPg" style="margin-bottom:15px!important;" class="row z-div">
-                            <div  id="vHFPh" class="col-md-12 z-div"> <button type="submit" id="vHFPi" style="background-color:#00857f;" class="btn btn-block z-login-control z-button z-button-primary">Đăng nhập</button></div>
+                            <div  id="vHFPh" class="col-md-12 z-div"> <button type="submit" id="vHFPi"  style="background-color:#00857f;" class="btn btn-block z-login-control z-button z-button-primary">Đăng nhập</button></div>
                           </div>
                         </div>
                       </form>

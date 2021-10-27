@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../service/auth.service';
 
@@ -22,7 +22,7 @@ export class CheckemailComponent implements OnInit {
   }
   createForm() {
     this.checkForm = this.fb.group({
-      email: [null, Validators.required],
+      email: [null, [Validators.required, Validators.email]],
 
     });
   }
@@ -33,5 +33,8 @@ export class CheckemailComponent implements OnInit {
       console.log(this.authService.getCheck());
 
     })
-}
+  }
+  get email(): FormArray {
+    return this.checkForm.get('email') as FormArray;
+  }
 }
